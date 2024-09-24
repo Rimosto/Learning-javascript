@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <HEad>
+
+    <title>JAVASCRIPT</title>
+    </HEad>
+    <BOdy bgcolor="blue">
+        <H1>LEANING JAVASCRIPT IS GREAT</H1>
+    </BOdy><!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Interactive User Card</title>
+        <style>
+            .user-card {
+                border: 1px solid #ccc;
+                padding: 16px;
+                margin: 16px 0;
+                border-radius: 8px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>User Information</h1>
+        <input type="text" id="name" placeholder="Enter your name">
+        <input type="number" id="age" placeholder="Enter your age">
+        <input type="text" id="hobby" placeholder="Enter your favorite hobby">
+        <button onclick="addUser()">Submit</button>
+    
+        <div id="userList"></div>
+    
+        <script>
+            const users = [];
+    
+            function addUser() {
+                const name = document.getElementById('name').value;
+                const age = document.getElementById('age').value;
+                const hobby = document.getElementById('hobby').value;
+    
+                const user = { name, age, hobby };
+                users.push(user);
+                displayUsers();
+                clearInputs();
+            }
+    
+            function displayUsers() {
+                const userList = document.getElementById('userList');
+                userList.innerHTML = ''; // Clear existing users
+                users.forEach(user => {
+                    const userCard = document.createElement('div');
+                    userCard.className = 'user-card';
+                    userCard.style.backgroundColor = '#f9f9f9';
+                    userCard.innerHTML = `
+                        <p><strong>Name:</strong> ${user.name}</p>
+                        <p><strong>Age:</strong> ${user.age}</p>
+                        <p><strong>Hobby:</strong> ${user.hobby}</p>
+                    `;
+                    if (user.age > 18) {
+                        userCard.innerHTML += '<p>You are eligible to vote.</p>';
+                    }
+                    const colorButton = document.createElement('button');
+                    colorButton.innerText = 'Change Background Color';
+                    colorButton.onclick = () => changeColor(userCard);
+                    userCard.appendChild(colorButton);
+                    userList.appendChild(userCard);
+                });
+            }
+    
+            function changeColor(card) {
+                const colors = ['#ff9999', '#99ff99', '#9999ff', '#ffff99', '#ffcc99'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                card.style.backgroundColor = randomColor;
+            }
+    
+            function clearInputs() {
+                document.getElementById('name').value = '';
+                document.getElementById('age').value = '';
+                document.getElementById('hobby').value = '';
+            }
+        </script>
+    </body>
+    </html>
+    
+</html>
